@@ -1,18 +1,31 @@
 <template>
-  <div id="app">
-      <select v-model="selectedProvice">
+  <div id="app" class="container">
+    <div class="form-row">
+    <div class="form-group col-md-6">
+      <label for="inputProvince">Province</label>
+      <select v-model="selectedProvice" class="form-control" id="inputProvince">
         <option :value="provinces.id" v-for="(provinces,index) in province" :key="index" >{{provinces.name}}</option>
       </select>
-      <select v-model="selectedCity" >
+    </div>
+    <div class="form-group col-md-4">
+      <label for="inputCity">City</label>
+      <select id="inputCity" class="form-control" v-model="selectedCity" >
         <option :value="cities.idCity" v-for="(cities,index) in citiesz" :key="index">{{cities.name}}</option>
       </select>
-      <select v-model="selectedDistrict">
+    </div>
+    <div class="form-group col-md-2">
+      <label for="inputDistrict">District</label>
+     <select id="inputDistrict" class="form-control" v-model="selectedDistrict">
         <option :value="districts.idDistrict" v-for="(districts,index) in districtez" :key="index">{{districts.name}}</option>
       </select>
-
-        <div id="value" v-if="selectedDistrict && selectedProvice && selectedCity">
-          <p>Provinsi {{provinceValue}},{{cityValue}},{{districtValue}}</p>
-        </div>
+    </div>
+  </div>
+      <div class="alert alert-success alert-dismissible fade show" v-if="selectedDistrict" role="alert">
+       <p>Provinsi {{provinceValue}},{{cityValue}},{{districtValue}}</p>
+        <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
     </div>
 </template>
 
@@ -63,19 +76,39 @@ export default {
           name: 'Kec.Lowokwaru' 
         },
         { 
-          id: '2',
+          id: '1',
           idDistrict:'2',
+          name: 'Kec.Klojen' 
+        },
+        { 
+          id: '2',
+          idDistrict:'3',
+          name: 'Kec.Rungkut' 
+        },
+        { 
+          id: '2',
+          idDistrict:'4',
           name: 'Kec.Genteng' 
         },
         { 
           id: '3',
-          idDistrict:'3',
+          idDistrict:'5',
           name: 'Kec.Babalak' 
         },
         { 
+          id: '3',
+          idDistrict:'6',
+          name: 'Kec.Bojongloa' 
+        },
+        { 
           id: '4',
-          idDistrict:'4',
+          idDistrict:'7',
           name: 'Kec.Culug' 
+        },
+         { 
+          id: '4',
+          idDistrict:'8',
+          name: 'Kec.Babakan' 
         }
       ],
       selectedDistrict: null,
@@ -113,11 +146,11 @@ export default {
       this.provinceValue = province[0].name
     },
     selectedCity:function(){
-      var city = this.city.filter(c => c.id.toLowerCase().indexOf(this.selectedCity) > -1);
+      var city = this.city.filter(c => c.idCity.toLowerCase().indexOf(this.selectedCity) > -1);
       this.cityValue = city[0].name
     },
     selectedDistrict:function(){
-       var district = this.district.filter(c => c.id.toLowerCase().indexOf(this.selectedDistrict) > -1);
+      var district = this.district.filter(c => c.idDistrict.toLowerCase().indexOf(this.selectedDistrict) > -1);
       this.districtValue = district[0].name
     }
   }
